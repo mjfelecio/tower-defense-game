@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://dl7vmobmp1p8c"]
 
-[node name="SceneHandler" type="Node2D" unique_id=244043671]
+[ext_resource type="PackedScene" uid="uid://di5hpbpxb2kdx" path="res://scenes/ui_scenes/main_menu.tscn" id="1_8qim7"]
+[ext_resource type="Script" uid="uid://lms0sul742v8" path="res://scene_handler.gd" id="1_sy2fw"]
+
+[node name="SceneHandler" type="Node" unique_id=586227681]
+script = ExtResource("1_sy2fw")
+
+[node name="MainMenu" parent="." unique_id=987755387 instance=ExtResource("1_8qim7")]
+size_flags_horizontal = 4
