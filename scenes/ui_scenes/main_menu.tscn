@@ -43,16 +43,25 @@ theme_override_constants/separation = 12
 alignment = 1
 
 [node name="StartGame" type="TextureButton" parent="M/VB" unique_id=1882660703]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("3_xqcya")
 texture_pressed = ExtResource("2_tgkk4")
+stretch_mode = 0
 
 [node name="Label" type="Label" parent="M/VB/StartGame" unique_id=693807540]
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -50.0
+offset_right = 175.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_xqcya")
@@ -61,17 +70,26 @@ text = "Start Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Settings" type="TextureButton" parent="M/VB" unique_id=494847632]
+[node name="Settings" type="TextureButton" parent="M/VB" unique_id=1987293292]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("3_xqcya")
 texture_pressed = ExtResource("2_tgkk4")
+stretch_mode = 0
 
-[node name="Label" type="Label" parent="M/VB/Settings" unique_id=517379707]
+[node name="Label" type="Label" parent="M/VB/Settings" unique_id=1279433738]
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -50.0
+offset_right = 175.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_xqcya")
@@ -80,17 +98,26 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="About" type="TextureButton" parent="M/VB" unique_id=416969634]
+[node name="About" type="TextureButton" parent="M/VB" unique_id=1760376564]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("3_xqcya")
 texture_pressed = ExtResource("2_tgkk4")
+stretch_mode = 0
 
-[node name="Label" type="Label" parent="M/VB/About" unique_id=628630470]
+[node name="Label" type="Label" parent="M/VB/About" unique_id=1335634325]
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -50.0
+offset_right = 175.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_xqcya")
@@ -99,17 +126,26 @@ text = "About"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Quit" type="TextureButton" parent="M/VB" unique_id=2029207522]
+[node name="Quit" type="TextureButton" parent="M/VB" unique_id=286407685]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("3_xqcya")
 texture_pressed = ExtResource("2_tgkk4")
+stretch_mode = 0
 
-[node name="Label" type="Label" parent="M/VB/Quit" unique_id=257527439]
+[node name="Label" type="Label" parent="M/VB/Quit" unique_id=1833331894]
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -50.0
+offset_right = 175.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_xqcya")
