@@ -1,3 +1,4 @@
+class_name GameScene
 extends Node2D
 
 const VALID_TILE_COLOR = "ad54ff3c"
@@ -19,8 +20,7 @@ func _ready() -> void:
 
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.connect("pressed", initiate_build_mode.bind(i.get_name().to_lower()))
-	start_next_wave()
-		
+
 
 func _process(delta: float) -> void:
 	if build_mode:

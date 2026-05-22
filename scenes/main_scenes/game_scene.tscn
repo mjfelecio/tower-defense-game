@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://dtgboxrr32hap" path="res://scenes/ui_scenes/ui.gd" id="3_pixuy"]
 [ext_resource type="Texture2D" uid="uid://cn8ay0ol2dst4" path="res://assets/towers/towerDefense_tile249.png" id="3_u6847"]
 [ext_resource type="Texture2D" uid="uid://2s5qa5m8ojnk" path="res://assets/towers/towerDefense_tile251.png" id="6_bymys"]
+[ext_resource type="Texture2D" uid="uid://c8urhd563dyqo" path="res://assets/ui/icons/right.png" id="7_fm1cv"]
+[ext_resource type="Texture2D" uid="uid://cuafnbtwdu0cn" path="res://assets/ui/icons/pause.png" id="8_lybp5"]
+[ext_resource type="Texture2D" uid="uid://mwxeftiri0yt" path="res://assets/ui/icons/fastForward.png" id="9_ihvhc"]
 
 [node name="GameScene" type="Node2D" unique_id=51263392]
 script = ExtResource("1_o7llx")
@@ -13,6 +16,7 @@ script = ExtResource("1_o7llx")
 [node name="Map1" parent="." unique_id=301796507 instance=ExtResource("1_veha7")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=294630730]
+process_mode = 3
 script = ExtResource("3_pixuy")
 
 [node name="HUD" type="Control" parent="UI" unique_id=560041728]
@@ -66,3 +70,37 @@ offset_top = 5.0
 offset_right = 72.0
 offset_bottom = 69.0
 texture = ExtResource("6_bymys")
+
+[node name="GameControls" type="HBoxContainer" parent="UI/HUD" unique_id=365096895]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -308.0
+offset_top = -100.0
+offset_right = -0.00024414063
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="PausePlay" type="TextureButton" parent="UI/HUD/GameControls" unique_id=1360838035]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource("7_fm1cv")
+texture_pressed = ExtResource("8_lybp5")
+stretch_mode = 0
+
+[node name="SpeedUp" type="TextureButton" parent="UI/HUD/GameControls" unique_id=966197568]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("9_ihvhc")
+stretch_mode = 0
+
+[connection signal="pressed" from="UI/HUD/GameControls/PausePlay" to="UI" method="_on_pause_play_pressed"]
+[connection signal="pressed" from="UI/HUD/GameControls/SpeedUp" to="UI" method="_on_speed_up_pressed"]
