@@ -11,11 +11,16 @@ var build_location: Vector2
 var build_type: String # Should prob be enum later
 var build_tile = null;
 
+var current_wave: int = 0
+var enemies_in_wave: int = 0
+
 func _ready() -> void:
 	map_node = get_node("Map1")
 
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.connect("pressed", initiate_build_mode.bind(i.get_name().to_lower()))
+	start_next_wave()
+		
 
 func _process(delta: float) -> void:
 	if build_mode:
@@ -28,6 +33,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_accept") and build_mode == true:
 		verify_and_build()
 		cancel_build_mode()
+
+##
+## Build functions
+##
 
 func initiate_build_mode(tower_type: String) -> void:
 	if build_mode:
@@ -71,3 +80,24 @@ func verify_and_build():
 		
 		## todo: deduct cash and update cash label
 		
+##
+## Wave functions
+##
+func start_next_wave() -> void:
+	var wave_data = retrieve_wave_data()
+	# Delay between waves
+	await get_tree().create_timer(0.2).timeout
+	spawn_enemies(wave_data)
+
+func retrieve_wave_data() -> Array:
+	var wave_data = [["blue_tank", 0.7], ["blue_tank", 0.1]]
+	current_wave += 1
+	enemies_in_wave = wave_data.size()
+	return wave_data
+
+func spawn_enemies(wave_data: Array) -> void:
+	for i in wave_data:
+		var new_enemy = load("res://scenes/enemies/" + i[0] + ".tscn").instantiate()
+		map_node.get_node("Path").add_child(new_enemy, true)
+		# Delay between each spawns based on specified wave_data
+		await get_tree().create_timer(i[1]).timeout
