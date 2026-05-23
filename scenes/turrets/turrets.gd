@@ -1,20 +1,22 @@
 extends Node2D
 
 var enemy_array = []
-var built = false
-var enemy
+var is_built: bool = false
+var enemy: PathFollow2D
+var type: String
+var is_ready: bool = true
 
 func _ready() -> void:
-	if built:
+	if is_built:
 		var collision_shape: CollisionShape2D = self.get_node("Range/CollisionShape2D")
-		# This is stupid
-		var normalized_tower_name = self.name.to_snake_case().replace("t_1", "t1");
-		collision_shape.shape.radius = 0.5 * GameData.tower_data[normalized_tower_name]["range"]
+		collision_shape.shape.radius = 0.5 * GameData.tower_data[type]["range"]
 
 func _physics_process(delta: float) -> void:
-	if enemy_array.size() != 0 and built:
+	if enemy_array.size() != 0 and is_built:
 		select_enemy()
 		turn_to_enemy()
+		if is_ready:
+			fire()
 	else:
 		enemy = null
 
@@ -27,6 +29,12 @@ func select_enemy() -> void:
 	var max_progress = enemy_progress_array.max()
 	var enemy_index = enemy_progress_array.find(max_progress)
 	enemy = enemy_array[enemy_index]
+
+func fire():
+	is_ready = false	
+	enemy.on_hit(GameData.tower_data[type]["damage"])
+	await get_tree().create_timer(GameData.tower_data[type]["rof"]).timeout
+	is_ready = true
 
 func turn_to_enemy():
 	get_node("Turret").look_at(enemy.position)

@@ -30,3 +30,6 @@ texture = ExtResource("3_v7dxf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1636139943]
 shape = SubResource("CircleShape2D_envb3")
 debug_color = Color(0.06234306, 0.5977641, 0.92182016, 0.41960785)
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
