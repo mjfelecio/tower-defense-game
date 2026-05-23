@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://rb5ify88spig" path="res://assets/towers/towerDefense_tile228.png" id="2_yn37p"]
 [ext_resource type="Texture2D" uid="uid://2s5qa5m8ojnk" path="res://assets/towers/towerDefense_tile251.png" id="3_v7dxf"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_envb3"]
+radius = 275.0
+
 [node name="MissileT1" type="Node2D" unique_id=243791709]
 script = ExtResource("1_yn37p")
 
@@ -21,3 +24,9 @@ texture = ExtResource("3_v7dxf")
 [node name="Missile2" type="Sprite2D" parent="Turret" unique_id=362399395]
 position = Vector2(5, 10)
 texture = ExtResource("3_v7dxf")
+
+[node name="Range" type="Area2D" parent="." unique_id=1064477993]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1636139943]
+shape = SubResource("CircleShape2D_envb3")
+debug_color = Color(0.06234306, 0.5977641, 0.92182016, 0.41960785)
