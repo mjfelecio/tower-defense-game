@@ -3,9 +3,48 @@
 [ext_resource type="Texture2D" uid="uid://ddtc76s6a5j4a" path="res://assets/towers/towerDefense_tile181.png" id="1_o0um8"]
 [ext_resource type="Script" uid="uid://u0qc4jmq42pc" path="res://scenes/turrets/gun_t1.gd" id="1_sgyl6"]
 [ext_resource type="Texture2D" uid="uid://cn8ay0ol2dst4" path="res://assets/towers/towerDefense_tile249.png" id="2_sgyl6"]
+[ext_resource type="Texture2D" uid="uid://yla4j7nkod8o" path="res://assets/effects/muzzle_flash.png" id="4_cm14j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3v6dm"]
 radius = 175.0
+
+[sub_resource type="Animation" id="Animation_cm14j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_367y8"]
+resource_name = "fire"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lm0dv"]
+_data = {
+&"RESET": SubResource("Animation_cm14j"),
+&"fire": SubResource("Animation_367y8")
+}
 
 [node name="GunT1" type="Node2D" unique_id=243791709]
 script = ExtResource("1_sgyl6")
@@ -20,11 +59,20 @@ offset = Vector2(12, 0)
 [node name="Muzzle" type="Marker2D" parent="Turret" unique_id=1226702489]
 position = Vector2(43, 0)
 
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle" unique_id=1931116651]
+visible = false
+position = Vector2(12, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_cm14j")
+
 [node name="Range" type="Area2D" parent="." unique_id=102047726]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1753860015]
 shape = SubResource("CircleShape2D_3v6dm")
 debug_color = Color(0.06234306, 0.5977641, 0.92182016, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=569994645]
+libraries/ = SubResource("AnimationLibrary_lm0dv")
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

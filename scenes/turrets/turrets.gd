@@ -4,6 +4,8 @@ var enemy_array = []
 var is_built: bool = false
 var enemy: PathFollow2D
 var type: String
+var category: String # projectile or missile
+
 var is_ready: bool = true
 
 func _ready() -> void:
@@ -14,7 +16,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if enemy_array.size() != 0 and is_built:
 		select_enemy()
-		turn_to_enemy()
+
+		if not $"AnimationPlayer".is_playing():
+			turn_to_enemy()
 		if is_ready:
 			fire()
 	else:
@@ -31,10 +35,22 @@ func select_enemy() -> void:
 	enemy = enemy_array[enemy_index]
 
 func fire():
-	is_ready = false	
+	is_ready = false
+	
+	if (category == "projectile"):
+		fire_gun()
+	elif (category == "missile"):
+		fire_missile()
+	
 	enemy.on_hit(GameData.tower_data[type]["damage"])
 	await get_tree().create_timer(GameData.tower_data[type]["rof"]).timeout
 	is_ready = true
+
+func fire_gun():
+	(get_node("AnimationPlayer") as AnimationPlayer).play("fire")
+
+func fire_missile():
+	pass
 
 func turn_to_enemy():
 	get_node("Turret").look_at(enemy.position)

@@ -13,11 +13,11 @@ script = ExtResource("1_7eqtj")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=366618660]
 
-[node name="TankBlue" type="Sprite2D" parent="CharacterBody2D" unique_id=1835150729]
-texture = ExtResource("1_w1xbx")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2086269472]
 shape = SubResource("RectangleShape2D_7eqtj")
+
+[node name="TankBlue" type="Sprite2D" parent="." unique_id=1835150729]
+texture = ExtResource("1_w1xbx")
 
 [node name="HealthBar" type="TextureProgressBar" parent="." unique_id=541610155]
 custom_minimum_size = Vector2(50, 5)
@@ -31,3 +31,6 @@ texture_under = ExtResource("3_salou")
 texture_progress = ExtResource("3_salou")
 tint_under = Color(0.23031491, 0.23031494, 0.23031494, 1)
 tint_progress = Color(0.37254903, 1, 0.37254903, 1)
+
+[node name="Impact" type="Marker2D" parent="." unique_id=1949880005]
+position = Vector2(-15, -15)

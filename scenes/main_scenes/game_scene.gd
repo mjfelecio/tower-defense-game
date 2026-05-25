@@ -77,6 +77,7 @@ func verify_and_build():
 		new_tower.position = build_location
 		new_tower.is_built = true
 		new_tower.type = build_type
+		new_tower.category = GameData.tower_data[build_type]["category"]
 		map_node.get_node("Turrets").add_child(new_tower, true)
 		(map_node.get_node("TowerExclusion") as TileMapLayer).set_cell(build_tile, 0, Vector2i(1, 0))
 		
