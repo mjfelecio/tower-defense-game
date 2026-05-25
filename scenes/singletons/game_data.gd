@@ -3,7 +3,7 @@ extends Node
 var tower_data = {
 	"gun_t1": {
 		"damage": 20,
-		"rof": .3,
+		"rof": 1,
 		"range": 350,
 		"category": "projectile"
 	},

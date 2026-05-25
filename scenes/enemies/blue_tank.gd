@@ -1,7 +1,10 @@
 extends PathFollow2D
 
-var speed = 150
-var hp = 500
+signal base_damaged(damage)
+
+var speed = 500
+var hp = 50
+var base_damage = 20
 
 @onready var health_bar: TextureProgressBar = $"HealthBar"
 @onready var impact_area: Marker2D = $"Impact"
@@ -14,6 +17,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	move(delta)
+	if progress_ratio == 1.0:
+		emit_signal("base_damaged", base_damage)
+		queue_free()
 	
 func move(delta: float) -> void: 
 	set_progress(get_progress() + speed * delta)

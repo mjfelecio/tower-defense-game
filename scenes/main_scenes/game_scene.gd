@@ -1,6 +1,8 @@
 class_name GameScene
 extends Node2D
 
+signal game_finished(result)
+
 const VALID_TILE_COLOR = "ad54ff3c"
 const INVALID_TILE_COLOR = "red"
 
@@ -14,6 +16,8 @@ var build_tile = null;
 
 var current_wave: int = 0
 var enemies_in_wave: int = 0
+
+var base_health = 100
 
 func _ready() -> void:
 	map_node = get_node("Map1")
@@ -72,17 +76,26 @@ func cancel_build_mode():
 func verify_and_build():
 	if build_valid:
 		# todo: check if has enough cash before this
-		var new_tower = load("res://scenes/turrets/" + build_type + ".tscn").instantiate()
+		var new_tower: Node2D = load("res://scenes/turrets/" + build_type + ".tscn").instantiate()
 		
 		new_tower.position = build_location
 		new_tower.is_built = true
 		new_tower.type = build_type
 		new_tower.category = GameData.tower_data[build_type]["category"]
+
 		map_node.get_node("Turrets").add_child(new_tower, true)
 		(map_node.get_node("TowerExclusion") as TileMapLayer).set_cell(build_tile, 0, Vector2i(1, 0))
 		
 		## todo: deduct cash and update cash label
-		
+
+func on_base_damaged(damage):
+	base_health -= damage
+	
+	if base_health <= 0:
+		emit_signal("game_finished", false)
+	else:
+		$"UI".update_health_bar(base_health)
+
 ##
 ## Wave functions
 ##
@@ -93,7 +106,7 @@ func start_next_wave() -> void:
 	spawn_enemies(wave_data)
 
 func retrieve_wave_data() -> Array:
-	var wave_data = [["blue_tank", 0.7], ["blue_tank", 0.1]]
+	var wave_data = [["blue_tank", 0.7], ["blue_tank", 0.1], ["blue_tank", 0.7], ["blue_tank", 0.1], ["blue_tank", 0.7], ["blue_tank", 0.7]]
 	current_wave += 1
 	enemies_in_wave = wave_data.size()
 	return wave_data
@@ -102,5 +115,7 @@ func spawn_enemies(wave_data: Array) -> void:
 	for i in wave_data:
 		var new_enemy = load("res://scenes/enemies/" + i[0] + ".tscn").instantiate()
 		map_node.get_node("Path").add_child(new_enemy, true)
+		new_enemy.connect("base_damaged", on_base_damaged)
+		
 		# Delay between each spawns based on specified wave_data
 		await get_tree().create_timer(i[1]).timeout

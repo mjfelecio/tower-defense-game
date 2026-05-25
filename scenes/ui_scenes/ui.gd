@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@onready var hp = $"HUD/InfoBar/HBox/HP"
+
 func set_tower_preview(tower_type, mouse_position) -> void:
 	# Cleanup previous previews
 	if get_node_or_null("TowerPreview"):
@@ -35,6 +37,16 @@ func update_tower_preview(tile_pos: Vector2, color: String) -> void:
 	if get_node("TowerPreview/DragTower").modulate != Color(color):
 		get_node("TowerPreview/DragTower").modulate = Color(color)
 		get_node("TowerPreview/Sprite2D").modulate = Color(color)
+
+func update_health_bar(base_health: float):
+	var tween = get_tree().create_tween()
+	tween.tween_property(hp, "value", base_health, .1)
+	if base_health >= 60:
+		hp.tint_progress = Color("3cc510") # Green
+	elif base_health <= 60 and base_health >= 25:
+		hp.tint_progress = Color("e1be32") # Orange
+	else:
+		hp.tint_progress = Color("e11e1e") # Red
 
 ##
 ## Game control functions
